@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Guia de Treinamento — Cadastro de Pessoa | Famol Móveis e Eletros
 
-## Getting Started
+Um guia interativo e elegante para o treinamento da equipe de Crédito da Famol Móveis e Eletros. Esta aplicação foi desenvolvida para apresentar, passo a passo, o fluxo completo de Cadastro de Pessoa Física, Jurídica e Estrangeira. 
 
-First, run the development server:
+Construída para parecer uma apresentação de slides de alto padrão, ela permite navegação rápida via teclado e possui micro-interações fluidas.
+
+## 🚀 Tecnologias Utilizadas
+
+Este projeto foi gerado com **Next.js** (App Router) e faz uso das seguintes tecnologias:
+
+- **[Next.js](https://nextjs.org/)** (v15+) — Framework React com App Router e Server/Client Components.
+- **[Tailwind CSS v4](https://tailwindcss.com/)** — Framework utilitário de CSS focado em performance, configurado com variáveis modernas, gradients refinados e suporte a *dark mode*.
+- **[Framer Motion](https://motion.dev/)** — Biblioteca de animação para React (via `motion/react`), garantindo transições de página e micro-interações elegantes e profissionais.
+- **[Lucide React](https://lucide.dev/)** — Ícones minimalistas e bonitos em toda a interface.
+- **[TypeScript](https://www.typescriptlang.org/)** — Tipagem estática para maior segurança e escalabilidade.
+
+## ✨ Funcionalidades
+
+- **Apresentação em Slides Interativos**: Navegação semelhante ao PowerPoint ou Keynote.
+- **Navegação por Teclado**: 
+  - Avançar: `Enter`, `Seta para Direita`, `Espaço` ou `Page Down`
+  - Voltar: `Seta para Esquerda`, `Backspace` ou `Page Up`
+  - Ir para o Ínicio: `Home`
+  - Ir para o Final: `End`
+- **Design UI/UX Premium**: Sistema de cores estilizado (`oklch`), paleta sofisticada baseada em "Azul Marinho" e "Laranja", sombras dinâmicas, texturas que remetem a papel (`paper-grain`) e fontes elegantes (**Fraunces** e **Inter**).
+
+## 📦 Como Rodar o Projeto Localmente
+
+### Pré-requisitos
+- Node.js versão **18.18.0** ou superior.
+
+### Instalação
+
+1. Clone ou extraia o repositório em sua máquina.
+2. Instale as dependências executando:
+
+```bash
+npm install
+```
+
+3. Inicie o servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Abra o navegador e acesse [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📂 Estrutura de Arquivos Principal
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/page.tsx`: Componente principal que gerencia o estado dos slides, controles de teclado, barra de progresso e layout de toda a apresentação.
+- `app/layout.tsx`: Configurações globais de SEO (Metadados da aplicação) e injeção do sistema de fontes elegantes (`Fraunces` e `Inter`).
+- `app/globals.css`: Variáveis CSS customizadas, utilitários do Tailwind v4 (incluindo sombreamento, backgrounds dinâmicos) e design system.
 
-## Learn More
+## 🛠️ Build de Produção
 
-To learn more about Next.js, take a look at the following resources:
+Para otimizar a aplicação para o ambiente de produção, execute:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Em seguida, para testar a versão construída:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run start
+```
