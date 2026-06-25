@@ -21,6 +21,8 @@ import {
   Sparkles,
   CornerDownLeft,
 } from "lucide-react";
+import Image from "next/image";
+import { div } from "motion/react-client";
 
 type Section = {
   id: string;
@@ -46,6 +48,11 @@ const sections: Section[] = [
           cadastros existentes e, na parte superior, traz filtros que ajudam a localizar
           rapidamente um registro já criado.
         </p>
+        <div className="flex gap-4">
+          <Image src="/cadastro.png" alt="" width={250} height={40} />
+          <Image src="/pessoa.png" alt="" width={400} height={50} />
+        </div>
+        <Image src="/filtros-pessoa.png" alt="" width={800} height={40} />
         <p>
           Para incluir um novo registro, clique em <Pill tone="brand">Adicionar</Pill>. O sistema
           abrirá a tela de inclusão de dados.
@@ -62,6 +69,7 @@ const sections: Section[] = [
       "No início do cadastro, é necessário classificar a pessoa. Essa escolha define quais campos o sistema apresentará.",
     body: (
       <div className="space-y-6">
+        <Image src="/tipo-pessoa.png" alt="" width={300} height={40} />
         <div className="grid gap-4 md:grid-cols-3">
           <TypeCard
             title="Pessoa Física"
@@ -90,6 +98,7 @@ const sections: Section[] = [
           O campo <strong>Finalidade</strong> indica se a empresa será consumidora final ou se fará
           revenda. Isso impacta diretamente nos cálculos de tributação diferenciada.
         </Callout>
+        <Image src="/finalidade.png" alt="" width={500} height={40} />
         <Callout icon={CheckCircle2}>
           Apenas campos marcados com <span className="font-semibold text-brand">*</span> são
           obrigatórios.
@@ -106,6 +115,7 @@ const sections: Section[] = [
       "Os campos variam conforme o tipo de pessoa. Aqui são definidos dados pessoais, limites de crédito e papéis no sistema.",
     body: (
       <div className="space-y-5">
+        <Image src="/aba-basico.png" alt="" width={1000} height={150} />
         <FieldGrid
           items={[
             "Sexo",
@@ -138,6 +148,7 @@ const sections: Section[] = [
       "Permite cadastrar um ou mais endereços, marcar o principal e registrar características de moradia.",
     body: (
       <div className="space-y-5">
+        <Image src="/aba-endereco.png" alt="" width={1000} height={150} />
         <StepList
           items={[
             "Marque o endereço Principal usando o botão correspondente.",
@@ -158,6 +169,7 @@ const sections: Section[] = [
             </div>
           ))}
         </div>
+        <Image src="/end-form.png" alt="" width={1000} height={150} />
       </div>
     ),
   },
@@ -170,6 +182,7 @@ const sections: Section[] = [
       "Centraliza telefone, celular, e-mail e demais meios eletrônicos de comunicação com a pessoa.",
     body: (
       <div className="space-y-4">
+        <Image src="/aba-contato.png" alt="" width={1000} height={150} />
         <p className="text-[15px] leading-relaxed text-foreground/85">
           Na coluna <Pill>Informação</Pill> selecione o tipo de contato e, ao lado, em{" "}
           <Pill>Contato</Pill>, informe o dado correspondente. Repita quantas vezes for necessário.
@@ -193,14 +206,17 @@ const sections: Section[] = [
     intro:
       "Registre referências do tipo Particular, Comercial, Pessoal ou Filiação para apoiar a análise de crédito.",
     body: (
-      <MiniTable
-        headers={["Informação (Nome)", "Contato"]}
-        rows={[
-          ["Maria Silva — Pessoal", "(11) 98888-1234"],
-          ["Móveis Bom Preço — Comercial", "(11) 3222-4567"],
-          ["João Souza — Filiação", "(11) 97777-9999"],
-        ]}
-      />
+      <div className="space-y-4">
+        <Image src="/aba-referencia.png" alt="" width={1000} height={150} />
+        <MiniTable
+          headers={["Informação (Nome)", "Contato"]}
+          rows={[
+            ["Maria Silva — Pessoal", "(11) 98888-1234"],
+            ["Móveis Bom Preço — Comercial", "(11) 3222-4567"],
+            ["João Souza — Filiação", "(11) 97777-9999"],
+          ]}
+        />
+      </div>
     ),
   },
   {
@@ -210,15 +226,46 @@ const sections: Section[] = [
     icon: ClipboardList,
     intro: "Dados adicionais que apoiam a tomada de decisão do crédito.",
     body: (
-      <div className="grid gap-4 md:grid-cols-2">
-        <InfoBlock
-          title="Sobre a Pessoa"
-          items={["Renda Comprovada", "Ocupação", "Número do Benefício"]}
-        />
-        <InfoBlock
-          title="Sobre o Cônjuge"
-          items={["Profissão", "Empresa", "Data de Admissão"]}
-        />
+      <div className="space-y-6">
+        <div>
+          <Image src="/aba-infos.png" alt="" width={1000} height={150} />
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <InfoBlock
+            title="Dados Profissionais"
+            items={[
+              "Profissão, Empresa e Contato",
+              "Data de Admissão",
+              "Renda Declarada e Comprovada",
+              "Ocupação e Benefício",
+            ]}
+          />
+          <InfoBlock
+            title="Dados do Cônjuge"
+            items={[
+              "Nome, CPF e Identidade",
+              "Nascimento e Contato",
+              "Profissão, Empresa e Admissão",
+              "Renda do Cônjuge",
+            ]}
+          />
+          <InfoBlock
+            title="Filiação"
+            items={[
+              "Nome do Pai",
+              "Nome da Mãe",
+            ]}
+          />
+          <InfoBlock
+            title="Outras Informações & Dependentes"
+            items={[
+              "Possui Carro / Moto",
+              "Dependentes (Tipo e Quantidade)",
+              "Botão para múltiplos dependentes",
+            ]}
+          />
+        </div>
       </div>
     ),
   },
@@ -229,17 +276,20 @@ const sections: Section[] = [
     icon: ShieldCheck,
     intro: "Exibe os vínculos como avalista relacionados a este cadastro.",
     body: (
-      <div className="grid gap-4 md:grid-cols-2">
-        <LineCard
-          label="Linha 1"
-          title="Avalista de outros clientes"
-          text="Vendas em que esta pessoa figurou como avalista de outro cliente."
-        />
-        <LineCard
-          label="Linha 2"
-          title="Vendas com avalistas vinculados"
-          text="Vendas deste cadastro nas quais foi exigido avalista."
-        />
+      <div className="space-y-3">
+        <Image src="/aba-avalistas.png" alt="" width={1000} height={150} />
+        <div className="grid gap-4 md:grid-cols-2">
+          <LineCard
+            label="Linha 1"
+            title="Avalista de outros clientes"
+            text="Vendas em que esta pessoa figurou como avalista de outro cliente."
+          />
+          <LineCard
+            label="Linha 2"
+            title="Vendas com avalistas vinculados"
+            text="Vendas deste cadastro nas quais foi exigido avalista."
+          />
+        </div>
       </div>
     ),
   },
@@ -250,11 +300,14 @@ const sections: Section[] = [
     icon: StickyNote,
     intro: "Registre apontamentos relevantes sobre a pessoa.",
     body: (
-      <Callout tone="warning" icon={StickyNote}>
-        Uma observação registrada <strong>não pode ser editada nem excluída</strong>. Ela fica
-        disponível apenas para consulta no <em>Histórico de Observações</em>. É possível cadastrar
-        várias observações no mesmo registro.
-      </Callout>
+      <div className="space-y-3">
+        <Image src="/observacoes.png" alt="" width={1000} height={150} />
+        <Callout tone="warning" icon={StickyNote}>
+          Uma observação registrada <strong>não pode ser editada nem excluída</strong>. Ela fica
+          disponível apenas para consulta no <em>Histórico de Observações</em>. É possível cadastrar
+          várias observações no mesmo registro.
+        </Callout>
+      </div>
     ),
   },
   {
@@ -301,24 +354,66 @@ const sections: Section[] = [
     body: (
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {[
-          "Consulta Financeira",
-          "Documentos",
-          "Limites de Crédito",
-          "Orçamentos",
-          "Pedidos de Compra",
-          "Assistência Técnica",
-          "Lançamento de Crédito",
-          "Análise de Crédito",
-          "Controle de Cobrança",
-          "Consultas SPC",
-          "Contatos (CRM)",
+          // "Consulta Financeira",
+          // "Documentos",
+          // "Limites de Crédito",
+          // "Orçamentos",
+          // "Pedidos de Compra",
+          // "Assistência Técnica",
+          // "Lançamento de Crédito",
+          // "Análise de Crédito",
+          // "Controle de Cobrança",
+          // "Consultas SPC",
+          // "Contatos (CRM)",
+          {
+            image: "/consulta-financeira.png",
+            description: "Leva para a tela de Consulta financeira onde é possível consultar os histórico de débitos do cliente."
+          },
+          {
+            image: "/documentos.png",
+            description: "Leva para a tela de Documentos onde é possível consultar as vendas já feitas para o cliente."
+          },
+          {
+            image: "/limites-de-credito.png",
+            description: "Leva para a tela de Limites de Crédito onde é possível alterar os limites de crédito do cliente."
+          },
+          {
+            image: "/pedidos-de-compra.png",
+            description: "Leva para a tela de Pedidos de Compra onde é possível consultar os pedidos de compra do cliente."
+          },
+          {
+            image: "/assistencia-tecnica.png",
+            description: "Leva para a tela de Assistência Técnica onde é possível gerenciar as assistências técnicas."
+          },
+          {
+            image: "/lancamento-de-credito.png",
+            description: "Leva para a tela de Lançamento de Crédito onde é possível gerenciar os lançamentos de crédito."
+          },
+          {
+            image: "/analise-de-credito.png",
+            description: "Leva para a tela de Análise de Crédito onde é possível consultar as análises de crédito do cliente."
+          },
+          {
+            image: "/controle-de-cobranca.png",
+            description: "Leva para a tela de Controle de Cobrança onde é possível gerenciar as cobranças."
+          },
+          {
+            image: "/consultas-spc.png",
+            description: "Leva para a tela de Consultas SPC onde é possível consultar as consultas SPC do cliente."
+          },
+          {
+            image: "/contatos-crm.png",
+            description: "Leva para a tela de Contatos CRM onde é possível consultar os contatos CRM do cliente."
+          },
         ].map((i) => (
           <div
-            key={i}
-            className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2.5 text-sm text-foreground/80 shadow-soft"
+            key={i.image}
+            className="flex flex-col gap-2 rounded-lg border border-border bg-card px-3 py-2.5 text-sm text-foreground/80 shadow-soft"
           >
-            <ArrowRight className="h-3.5 w-3.5 text-brand" />
-            {i}
+            {/* <ArrowRight className="h-3.5 w-3.5 text-brand" />
+            {i} */}
+            <Image src={i.image} alt="" width={200} height={150} />
+            <p>{i.description}</p>
           </div>
         ))}
       </div>
@@ -335,9 +430,18 @@ const sections: Section[] = [
       <div className="space-y-4">
         <StepList
           items={[
-            "Para editar, clique sobre o nome da pessoa na tela principal: o registro abrirá para edição ou exclusão.",
-            "Se houver movimentações vinculadas, o sistema impede a exclusão e exibe uma mensagem — nesse caso, inative o cadastro.",
-            "Use Imprimir Cadastro ao final da tela para coletar a assinatura do cliente confirmando os dados.",
+            {
+              title: "Para editar, clique sobre o nome da pessoa na tela principal: o registro abrirá para edição ou exclusão.",
+              image: "/editar-cliente.png",
+            },
+            {
+              title: "Se houver movimentações vinculadas, o sistema impede a exclusão e exibe uma mensagem — nesse caso, inative o cadastro.",
+              image: "/erro-excluir-cliente.png",
+            },
+            {
+              title: "Use Imprimir Cadastro ao final da tela para coletar a assinatura do cliente confirmando os dados.",
+              image: "/imprimir-cadastro.png",
+            },
           ]}
         />
       </div>
@@ -472,11 +576,10 @@ export default function Index() {
               key={i}
               onClick={() => go(i)}
               aria-label={`Ir para slide ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all ${
-                i === current
-                  ? "w-6 bg-brand"
-                  : "w-1.5 bg-border hover:bg-muted-foreground/50"
-              }`}
+              className={`h-1.5 rounded-full transition-all ${i === current
+                ? "w-6 bg-brand"
+                : "w-1.5 bg-border hover:bg-muted-foreground/50"
+                }`}
             />
           ))}
         </div>
@@ -645,9 +748,8 @@ function TypeCard({
     <motion.div
       whileHover={{ y: -3 }}
       transition={{ duration: 0.2 }}
-      className={`rounded-2xl border p-5 shadow-soft transition-shadow hover:shadow-elegant ${
-        highlight ? "border-brand/40 bg-brand-soft/40" : "border-border bg-card"
-      }`}
+      className={`rounded-2xl border p-5 shadow-soft transition-shadow hover:shadow-elegant ${highlight ? "border-brand/40 bg-brand-soft/40" : "border-border bg-card"
+        }`}
     >
       <div className="mb-3 flex items-center justify-between">
         <h3 className="font-display text-lg font-semibold text-ink">{title}</h3>
@@ -708,7 +810,7 @@ function FieldGrid({ items }: { items: string[] }) {
   );
 }
 
-function StepList({ items }: { items: string[] }) {
+function StepList({ items }: { items: string[] | { title: string; image?: string }[] }) {
   return (
     <ol className="space-y-3">
       {items.map((t, i) => (
@@ -718,12 +820,23 @@ function StepList({ items }: { items: string[] }) {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: i * 0.05 }}
-          className="flex items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-soft"
+          className="flex flex-col items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-soft"
         >
           <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand font-mono text-[11px] font-bold text-brand-foreground">
             {i + 1}
           </span>
-          <span className="text-[14.5px] leading-relaxed text-foreground/85">{t}</span>
+          <span className="text-[14.5px] leading-relaxed text-foreground/85">
+            {typeof t === "string" ? t : t.title}
+          </span>
+          {typeof t !== "string" && t.image && (
+            <Image
+              src={t.image}
+              alt={t.title}
+              width={1000}
+              height={400}
+              className="mt-2 rounded-lg border border-border bg-card shadow-soft"
+            />
+          )}
         </motion.li>
       ))}
     </ol>
@@ -741,9 +854,8 @@ function MiniTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
       {rows.map((r, i) => (
         <div
           key={i}
-          className={`grid grid-cols-2 px-4 py-3 text-sm text-foreground/85 ${
-            i !== rows.length - 1 ? "border-b border-border" : ""
-          }`}
+          className={`grid grid-cols-2 px-4 py-3 text-sm text-foreground/85 ${i !== rows.length - 1 ? "border-b border-border" : ""
+            }`}
         >
           <div className="font-medium">{r[0]}</div>
           <div className="text-muted-foreground">{r[1]}</div>
